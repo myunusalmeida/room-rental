@@ -36,7 +36,7 @@
                         <?php
                             $rooms = mysqli_query($conn, "SELECT r.*
                                                             FROM rooms r
-                                                            LEFT JOIN transactions b ON b.room_id = r.room_id
+                                                            LEFT JOIN books b ON b.room_id = r.room_id
                                                             WHERE b.book_id IS NULL
                                                             OR (b.book_end_date >= '$book_start_date' AND b.book_start_date >= '$book_end_date')
                                                             OR (b.book_end_date <= '$book_start_date' AND b.book_start_date <= '$book_end_date')");

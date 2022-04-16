@@ -26,7 +26,7 @@
             $tenant_id = mysqli_fetch_assoc($tenant)['tenant_id'];
     
             // QUERY ADD BOOKING
-            $booking = mysqli_query($conn, "INSERT INTO transactions (room_id, tenant_id, book_start_date, book_end_date, payment_status) VALUES ('$room_id', '$tenant_id', '$book_start_date', '$book_end_date', 'paid')");
+            $booking = mysqli_query($conn, "INSERT INTO books (room_id, tenant_id, book_start_date, book_end_date, payment_status) VALUES ('$room_id', '$tenant_id', '$book_start_date', '$book_end_date', 'paid')");
     
             // CHANGE ROOM STATUS TO BOOKED
             $change_room_status = mysqli_query($conn, "UPDATE rooms SET room_availability = 'Booked' WHERE room_id = '$room_id'");
@@ -36,7 +36,7 @@
         if($_GET['action'] == 'delete') {
             $id = $_GET['id'];
             // DELETE DATA
-            $query = mysqli_query($conn, "DELETE FROM transactions WHERE book_id = '$id'");
+            $query = mysqli_query($conn, "DELETE FROM books WHERE book_id = '$id'");
             header('location: ../books.php');
         }
     }

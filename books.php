@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                         <?php
-                            $query = mysqli_query($conn, "SELECT * FROM transactions");
+                            $query = mysqli_query($conn, "SELECT * FROM books");
                             $no = 1;
                             while($row = mysqli_fetch_assoc($query)) {
                                 $room = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM rooms WHERE room_id = '$row[room_id]'"));
@@ -40,26 +40,31 @@
                             <td><?= $row['book_end_date'] ?></td>
                             <td>
                                 <?php
-                                    if($row['payment_status'] == 'Paid') {
-                                        echo '<span class="badge bg-success">Paid</span>';
+                                    if($row['payment_status'] == 'unpaid') {
+                                        $date_in_7_day = date('Y-m-d', strtotime($row['book_start_date'] . ' + 7 days')); // 7 days from start date
+                                        $diff = date_diff(date_create($date_in_7_day), date_create(date('Y-m-d')));
+                                        // echo $diff->format('%R%a days');
+                                        if($date_in_7_day > date('Y-m-d')) { // if 7 days from start date is greater than today
+                                            echo '<span class="badge bg-danger">Late Paying in ' . $diff->format('%R%a days') . '</span>'; // late paying in x days
+                                        } else { // if 7 days from start date is less than today
+                                            echo '<span class="badge bg-warning">unpaid</span>'; // unpaid
+                                        }
                                     } else {
-                                        echo '<span class="badge bg-danger">Unpaid</span>';
+                                        echo '<span class="badge bg-success">Paid</span>';
                                     }
-                                ?>    
+                                ?>
                             </td>
                             <td class="d-flex gap-2">
                                 <?php
-                                    if($row['payment_status'] == 'Paid') {
-                                        echo '<a href="config/action-book.php?action=delete&id=' . $row['book_id'] . '"
-                                        onClick="return confirm(Yakin Ingin Menghapus Data? \nData Tersebut Tidak Bisa Dikembalikan Lagi !)"
-                                        class="btn btn-sm btn-outline-secondary">Delete</a>';
+                                    if($row['payment_status'] == 'paid') {
+                                        echo '<a href="config/action-book.php?action=book-complete&id='. $row['book_id'] .'" class="btn btn-sm btn-success">Booking Completed</a>';
                                     } else {
-                                        echo '<a href="config/action-book.php.php?action=paid&id='.$row['book_id'].'" class="btn btn-primary btn-sm">Paid</a>';
-                                        echo '<a href="config/action-book.php?action=delete&id=' . $row['book_id'] . '"
-                                        onClick="return confirm(Yakin Ingin Menghapus Data? \nData Tersebut Tidak Bisa Dikembalikan Lagi !)"
-                                        class="btn btn-sm btn-outline-secondary">Delete</a>';
+                                        echo '<a href="config/action-book.php?action=paid&id='. $row['book_id'] .'" class="btn btn-sm btn-primary">Pay Now</a>';
                                     }
                                 ?>
+                                <a href="config/action-book.php?action=delete&id=<?= $row['book_id'] ?>"
+                                    onClick="return confirm('Yakin Ingin Menghapus Data? \nData Tersebut Tidak Bisa Dikembalikan Lagi !')"
+                                    class="btn btn-sm btn-outline-secondary">Delete</a>
                             </td>
                         </tr>
                         <?php } ?>
