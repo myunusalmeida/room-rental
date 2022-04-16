@@ -33,11 +33,16 @@
             header('location: ../books.php');
         }
     } else if($_GET['action']) {
+        $id = $_GET['id'];
+        
         if($_GET['action'] == 'delete') {
-            $id = $_GET['id'];
             // DELETE DATA
             $query = mysqli_query($conn, "DELETE FROM books WHERE book_id = '$id'");
             header('location: ../books.php');
+        } else if($_GET['action'] == 'paid') {
+            // CHANGE PAYMENT STATUS TO PAID
+            $query = mysqli_query($conn, "UPDATE books SET payment_status = 'paid' WHERE book_id = '$id'");
+            header('location: ../invoice.php?id='.$id);
         }
     }
 ?>

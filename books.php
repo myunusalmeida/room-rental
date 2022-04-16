@@ -57,9 +57,10 @@
                             <td class="d-flex gap-2">
                                 <?php
                                     if($row['payment_status'] == 'paid') {
-                                        echo '<a href="config/action-book.php?action=book-complete&id='. $row['book_id'] .'" class="btn btn-sm btn-success">Booking Completed</a>';
+                                        echo '<a href="book-complete.php?id='. $row['book_id'] .'" class="btn btn-sm btn-success">Booking Completed</a>';
+                                        echo '<a href="invoice.php?id='. $row['book_id'] .'" class="btn btn-sm btn-info text-white">Invoice</a>';
                                     } else {
-                                        echo '<a href="config/action-book.php?action=paid&id='. $row['book_id'] .'" class="btn btn-sm btn-primary">Pay Now</a>';
+                                        echo '<a href="config/action-book.php?action=paid&id='. $row['book_id'] .'" class="btn btn-sm btn-primary" target="_blank">Pay Now</a>';
                                     }
                                 ?>
                                 <a href="config/action-book.php?action=delete&id=<?= $row['book_id'] ?>"

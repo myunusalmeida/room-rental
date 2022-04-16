@@ -1,3 +1,14 @@
+<?php
+    if(!isset($_GET['id'])) {
+        header("Location: books.php");
+    }
+
+    include('config/config.php');
+
+    $book = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM books WHERE book_id = '$_GET[id]'"));
+    $room = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM rooms WHERE room_id = '$book[room_id]'"));
+    $tenant = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM tenants WHERE tenant_id = '$book[tenant_id]'"));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,41 +22,38 @@
 <body>
 
     <section class="container">
-        <!-- <div class="row justify-content-between mb-5"> -->
-            <!-- <div class="col-md-12"> -->
-                <div class="invoice-title mb-5">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h2>Invoice</h2>
-                        <h3 class="text-right">Order # 12345</h3>
-                    </div>
-                </div>
-            <!-- </div> -->
+        <div class="invoice-title mb-5">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2>Invoice</h2>
+                <h3 class="text-right">Order # 12345</h3>
+            </div>
+        </div>
 
         <div class="d-flex justify-content-between">
             <div class="col-md-4">
                 <h5 class="mb-3">Bill From</h5>
-                <p>Name: <strong>Muhammad Yunus Almeida</strong></p>
-                <p>Company Name: <strong>Onlenkan Academy</strong></p>
-                <p>Street Address: <strong>Jl. Triarona no. 420 Blitar</strong></p>
-                <p>City, ST ZIP Code: <strong>Blitar, 31231</strong></p>
+                <p>Name: <strong>Kostan</strong></p>
+                <p>Company Name: <strong>Jakarta</strong></p>
+                <p>Street Address: <strong>Jl. Tribun 781</strong></p>
+                <p>City, ST ZIP Code: <strong>Jakarta, 31231</strong></p>
                 <p>Phone: <strong>+62 8123 4567 89</strong></p>
             </div>
             <div class="col-md-4">
                 <h5 class="mb-3">Bill To</h5>
-                <p>Name: <strong>Muhammad Yunus Almeida</strong></p>
-                <p>Company Name: <strong>Onlenkan Academy</strong></p>
-                <p>Street Address: <strong>Jl. Triarona no. 420 Blitar</strong></p>
+                <p>Name: <strong><?= $tenant['tenant_name'] ?></strong></p>
+                <p>Company Name: <strong>Money Heist</strong></p>
+                <p>Street Address: <strong><?= $tenant['tenant_address'] ?></strong></p>
                 <p>City, ST ZIP Code: <strong>Blitar, 31231</strong></p>
-                <p>Phone: <strong>+62 8123 4567 89</strong></p>
+                <p>Phone: <strong><?= $tenant['tenant_phone'] ?></strong></p>
             </div>
             <div class="col-md-4">
                 <h5 class="mb-3">Invoice No. 31321</h5>
-                <p>Invoice Date: 14 Agustus 2022</p>
-                <p>Due Date: 14 Agustus 2022</p>
+                <p>Invoice Date: <?= date('d-m-Y') ?></p>
+                <p>Due Date: <?= date('d-m-Y') ?></p>
             </div>
         </div>
 
-        <table class="table">
+        <table class="table mt-5">
             <thead>
                 <tr class="table-info">
                     <th>Property Address</th>
@@ -56,16 +64,24 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Room M1</td>
-                    <td>2 Month</td>
-                    <td>Rp. 1.000.000</td>
-                    <td>Rp. 2.000.000</td>
+                    <td><?= $room['room_label'] ?></td>
+                    <td>
+                        <?php
+                            $date1 = new DateTime($book['book_start_date']);
+                            $date2 = new DateTime($book['book_end_date']);
+
+                            $diff = $date2->diff($date1)->format("%m");
+                            echo $diff . " months";
+                        ?>
+                    </td>
+                    <td>Rp. <?= number_format($room['room_monthly_price']) ?></td>
+                    <td>Rp. <?= number_format($room['room_monthly_price'] * $diff); ?></td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>Subtotal</td>
-                    <td>Rp. 2.000.000</td>
+                    <td>Rp. <?= number_format($room['room_monthly_price'] * $diff) ?></td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
@@ -77,7 +93,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>Total</td>
-                    <td>Rp. 2.000.000</td>
+                    <td>Rp. <?= number_format($room['room_monthly_price'] * $diff) ?></td>
                 </tr>
             </tbody>
         </table>
