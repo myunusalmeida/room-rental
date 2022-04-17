@@ -3,13 +3,14 @@
     include('layouts/header.php');
 
     // SUM FOR BOOK TABLE
-    $sum_histories = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(total_price) AS total_income FROM histories"));
+    $year = $_GET['year'];
+    $sum_histories = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(total_price) AS total_income FROM histories WHERE YEAR(book_end_date) = '$year'"));
 ?>
 
 <section class="main-content">
     <div class="container">
         <div class="row align-items-center justify-content-between">
-            <h3 class="col">Income</h3>
+            <h3 class="col">Income in <?= $year ?></h3>
             <div class="col-md-4 d-flex justify-content-end gap-3">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,9 +36,9 @@
                         Peryear
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="income-permonth.php?month=2020">2020</a></li>
-                        <li><a class="dropdown-item" href="income-permonth.php?month=2021">2021</a></li>
-                        <li><a class="dropdown-item" href="income-permonth.php?month=2022">2022</a></li>
+                        <li><a class="dropdown-item" href="income-peryear.php?year=2020">2020</a></li>
+                        <li><a class="dropdown-item" href="income-peryear.php?year=2021">2021</a></li>
+                        <li><a class="dropdown-item" href="income-peryear.php?year=2022">2022</a></li>
                     </ul>
                 </div>
             </div>
@@ -55,7 +56,7 @@
                         <tbody>
                             <?php
                                 $no = 1;
-                                $histories = mysqli_query($conn, "SELECT * FROM histories");
+                                $histories = mysqli_query($conn, "SELECT * FROM histories WHERE YEAR(book_end_date) = '$year'");
                                 while ($history = mysqli_fetch_assoc($histories)) {
                             ?>
                             <tr>

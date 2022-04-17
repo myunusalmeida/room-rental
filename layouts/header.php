@@ -2,7 +2,7 @@
     include('config/config.php');
 
     if (!isset($_SESSION['id_user'])) {
-        header('location: ./');
+        header('location: login.php');
     }
 ?>
 
