@@ -17,7 +17,7 @@
             <a href="tenants.php" class="btn btn-outline-secondary">Back to tenants list</a>
         </div>
 
-        <div class="card border-0 mt-4">
+        <div class="card  mt-4">
             <div class="card-body">
                 <table class="table">
                     <tr style="vertical-align: middle;">

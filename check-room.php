@@ -16,7 +16,7 @@
             <h3>Room Available in <?= $book_start_date ?> to <?= $book_end_date ?></h3>
         </div>
 
-        <div class="card border-0 mt-4">
+        <div class="card  mt-4">
             <div class="card-body">
                 <table class="table">
                     <thead>

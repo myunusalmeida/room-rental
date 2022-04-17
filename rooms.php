@@ -10,7 +10,7 @@
             <a href="room-add.php" class="btn btn-primary">Add New Room</a>
         </div>
 
-        <div class="card border-0 mt-4">
+        <div class="card  mt-4">
             <div class="card-body">
                 <table class="table">
                     <thead>

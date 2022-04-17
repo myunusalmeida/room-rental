@@ -16,7 +16,7 @@
             <h3>Edit Tenant <?= $data['tenant_name'] ?></h3>
         </div>
 
-        <div class="card border-0 mt-4">
+        <div class="card  mt-4">
             <div class="card-body">
                 <form class="row g-3" action="config/action-tenant.php" method="POST">
                     <input type="hidden" name="action" value="edit">

@@ -23,4 +23,8 @@ a {
 section {
   padding: 30px 0;
 }
+
+.login .row {
+  height: 100vh;
+}
 /*# sourceMappingURL=style.css.map */

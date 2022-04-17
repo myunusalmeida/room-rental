@@ -7,7 +7,7 @@
     <div class="container">
         <h3>Tenants</h3>
 
-        <div class="card border-0 mt-4">
+        <div class="card  mt-4">
             <div class="card-body">
                 <table class="table">
                     <thead>

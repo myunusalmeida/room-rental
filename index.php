@@ -42,7 +42,7 @@
             </div>
             
             <h4 class="mt-5">Unpaid Report</h4>
-            <div class="card border-0 mt-3">
+            <div class="card  mt-3">
                 <div class="card-body">
                     <table class="table">
                         <thead>
@@ -75,7 +75,7 @@
                                         $date_in_7_day = date('Y-m-d', strtotime($row['book_start_date'] . ' + 7 days')); // 7 days from start date
                                         $diff = date_diff(date_create($date_in_7_day), date_create(date('Y-m-d')));
                                         // echo $diff->format('%R%a days');
-                                        if($date_in_7_day > date('Y-m-d')) { // if 7 days from start date is greater than today
+                                        if(date('Y-m-d') > $date_in_7_day ) { // if 7 days from start date is greater than today
                                             echo '<span class="badge bg-danger">Late Paying in ' . $diff->format('%R%a days') . '</span>'; // late paying in x days
                                         } else { // if 7 days from start date is less than today
                                             echo '<span class="badge bg-warning">unpaid</span>'; // unpaid

@@ -18,7 +18,13 @@
                     <a href="tenants.php" class="nav-link">Tenants</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">History</a>
+                    <a href="history.php" class="nav-link">History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="income.php" class="nav-link">Income</a>
+                </li>
+                <li class="nav-item">
+                    <a href="config/logout.php" onclick="return confirm('Are you sure?')" class="nav-link">Logout</a>
                 </li>
             </ul>
         </div>
