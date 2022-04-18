@@ -1,5 +1,5 @@
 <?php
-    $title = 'Room Book';
+    $title = 'Book Room';
     include('layouts/header.php');
 
     $room_id         = $_GET['room_id'];
@@ -104,6 +104,44 @@
                                     <td>From Date</td>
                                     <td>:</td>
                                     <th><?= $book_end_date ?></th>
+                                </tr>
+                                <tr>
+                                    <td>Book Duration</td>
+                                    <td>:</td>
+                                    <th>
+                                        <?php
+                                            $date1 = new DateTime($book_start_date);
+                                            $date2 = new DateTime($book_end_date);
+                                        
+                                            $diff = $date2->diff($date1)->format("%m");
+                                            echo $diff . " Months";
+                                        ?>    
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td>:</td>
+                                    <th>
+                                        <?php
+                                            $subtotal = $room_data['room_monthly_price'] * $diff;
+                                            echo "Rp. " . number_format($subtotal);
+                                        ?>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Deposit</td>
+                                    <td>:</td>
+                                    <th>Rp. 1,000,000</th>
+                                </tr>
+                                <tr>
+                                    <td>Total Price</td>
+                                    <td>:</td>
+                                    <th>
+                                        <?php
+                                            $total_price = $subtotal + 1000000;
+                                            echo "Rp. " . number_format($total_price) . "";
+                                        ?>
+                                    </th>
                                 </tr>
                             </table>
                             <button class="btn btn-primary mt-3 w-100">Start Book</button>

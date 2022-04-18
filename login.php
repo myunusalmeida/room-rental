@@ -24,9 +24,9 @@
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Login</h4>
+                            <h4 class="card-title text-center">Welcome to Summer's Kost</h4>
 
-                            <form action="" method="post" class="mt-5">
+                            <form action="" method="post" class="mt-4">
                                 <div class="form-group mb-3">
                                     <label for="username">Username</label>
                                     <input type="text" name="username" id="username" class="form-control" required>

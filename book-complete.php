@@ -93,32 +93,41 @@
                             <table class="table">
                                 <tr>
                                     <td>Book ID</td>
-                                    <td>: <?= $id ?></td>
+                                    <th>: <?= $id ?></th>
                                 </tr>
                                 <tr>
                                     <td>Tenant Name</td>
-                                    <td>: <?= $tenant['tenant_name'] ?></td>
+                                    <th>: <?= $tenant['tenant_name'] ?></th>
                                 </tr>
                                 <tr>
                                     <td>Room Label</td>
-                                    <td>: <?= $room['room_label'] ?></td>
+                                    <th>: <?= $room['room_label'] ?></th>
                                 </tr>
                                 <tr>
                                     <td>Book Duration</td>
-                                    <td>: <?= $diff ?> month</td>
+                                    <th>: <?= $diff ?> month</th>
                                 </tr>
                                 <tr>
                                     <td>Room Price</td>
-                                    <td>: Rp. <?= number_format($room['room_monthly_price']) ?>/month</td>
+                                    <th>: Rp. <?= number_format($room['room_monthly_price']) ?>/month</th>
                                 </tr>
                                 <tr>
-                                    <td>Total Price (without fines)</td>
-                                    <td>: Rp. <?= number_format($total) ?></td>
+                                    <td>Subtotal</td>
+                                    <th>: Rp. <?= number_format($total) ?></th>
                                 </tr>
+                                <tr>
+                                    <td>Deposit</td>
+                                    <th>: Rp. 1,000,000</th>
+                                </tr>
+                                <tr>
+                                    <td>Total (Without Fines)</td>
+                                    <th>: Rp. <?= number_format($total + 1000000) ?></th>
+                                </tr>
+
                             </table>
 
                             <button type="submit" class="btn btn-primary btn-block w-100 mt-3">Complete</button>
-                            <a href="books.php" class="btn btn-secondary btn-block w-100 mt-2">Cancel</a>
+                            <a href="books.php" class="btn btn-light btn-block w-100 mt-2">Cancel</a>
                         </div>
                     </div>
                 </div>

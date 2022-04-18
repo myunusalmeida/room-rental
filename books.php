@@ -1,5 +1,5 @@
 <?php
-    $title = 'books';
+    $title = 'Books';
     include('layouts/header.php');
 ?>
 
