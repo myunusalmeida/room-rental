@@ -49,7 +49,7 @@
                                 <td><?= $tenant['tenant_name'] ?></td>
                                 <td><?= $row['book_start_date'] ?></td>
                                 <td><?= $row['book_end_date'] ?></td>
-                                <td>Rp. <?= number_format($total_room) ?></td>
+                                <td>Rp. <?= number_format($total_room + 1000000) ?></td>
                                 <td>Rp. <?= number_format($total_fines) ?></td>
                                 <td>Rp. <?= number_format($row['total_price']) ?></td>
                                 <td class="d-flex gap-2">
